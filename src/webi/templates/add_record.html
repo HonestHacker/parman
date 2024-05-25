@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+        <title>PARMAN | Добавление записи.</title>
+        <link rel="stylesheet" href="./../static/form.css">
+    </head>
+    <body>
+        <div class="form-container">
+            <img src="./../static/logo.svg">
+            <h1>Добавление записи.</h1>
+            <form method="POST">
+                <input #username name="service" placeholder="Сервис...">
+                <input #username name="username" placeholder="Имя пользователя...">
+                <input #password name="password" type="password" placeholder="Пароль...">
+                <textarea name="description" placeholder="Описание..."></textarea>
+                <input type="submit" value="Добавить.">
+            </form>
+            <span style="color: red;">{{ error_msg }}</span>
+        </div>
+    </body>
+</html>

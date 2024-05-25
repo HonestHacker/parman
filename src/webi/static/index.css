@@ -1,0 +1,28 @@
+body {
+    margin: 0 auto;
+    font-family: Arial;
+    background-color: #090909;
+    color: white;
+}
+
+.main table, th, td {
+    /*table-layout: fixed;*/
+    margin: auto;
+    border: 1px solid;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.main table {
+    width: 70%;
+}
+
+input {
+    margin-bottom: 10px;
+    font-size: 16px;
+    background-color: #1E1E1E;
+    color: white;
+    text-align: center;
+    box-shadow: none;
+    border: 0;
+}

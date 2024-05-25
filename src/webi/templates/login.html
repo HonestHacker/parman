@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+        <title>PARMAN | Вход.</title>
+        <link rel="stylesheet" href="./../static/form.css">
+    </head>
+    <body>
+        <div class="form-container">
+            <img src="./../static/logo.svg">
+            <h1>Вход.</h1>
+            <form method="POST">
+                <input #username name="username" placeholder="Имя пользователя...">
+                <input #password name="password" type="password" placeholder="Мастер-пароль...">
+                <input type="submit" value="Войти.">
+            </form>
+            <span style="color: red;">{{ error_msg }}</span>
+            Не зарегистрированы? Нажмите <a href="#">здесь.</a>
+        </div>
+    </body>
+</html>

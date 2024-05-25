@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>PARMAN | Главная.</title>
+        <link rel="stylesheet" href="./../static/sidebar.css">
+        <link rel="stylesheet" href="./../static/index.css">
+        <script type="text/javascript" src="./../static/index.js"></script>
+    </head>
+    <body>
+        <div class="sidenav">
+            <img src="./../static/logo.svg">
+            <a href="#" onclick="openAddRecordWindow()">Добавить поле.</a>
+            <a href="#">Изменить поле.</a>
+            <a href="#">Удалить поле.</a>
+            <a href="/logout">Выйти.</a>
+            <hr>
+            <a href="#">О Parman.</a>
+          </div>
+        <div class="main">
+            <table>
+                <colgroup>
+                    <col span="1" style="width: 1%;">
+                    <col span="1" style="width: 5%;">
+                    <col span="1" style="width: 8%;">
+                    <col span="1" style="width: 8%;">
+                    <col span="1" style="width: 15%;">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>№</th>
+                        <th>Сервис</th>
+                        <th>Имя пользователя</th>
+                        <th>Пароль</th>
+                        <th>Описание</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for record in records %}
+                        <tr>
+                            <td>{{ record.id }}</td>
+                            <td>{{ record.service }}</td>
+                            <td>{{ record.username }}</td>
+                            <td>
+                                <input id="password{{ record.id }}" type="password" value="{{ record.password }}" disabled>
+                                <button onclick="togglePasswordVisibility('{{ record.id }}');">Show</button>
+                            </td>
+                            <td>{{ record.description }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>
