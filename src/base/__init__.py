@@ -1,3 +1,4 @@
+from datetime import datetime
 from . import db
 from .models import *
 import traceback
@@ -73,12 +74,15 @@ class MainHandler:
                 is_valid_credits = mgr.check_credits(user)
                 if not is_valid_credits:
                     return forbidden
+                date = datetime.now().strftime("%d.%m.%Y, %H:%M:%S")
+                date_of_creating = f'\nДата создания: {date}'
+                date_of_updating = f'\nДата обновления: {date}'
                 record = DecryptedRecord(
                     uid=mgr.get_user_by_username(user.username).id,
                     service=q['record']['service'],
                     username=q['record']['username'],
                     password=q['record']['password'],
-                    description=q['record']['description']
+                    description=q['record']['description'] + date_of_creating + date_of_updating
                 ).encrypt(user.password)
                 mgr.add_record(record)
         except (TypeError, KeyError) as e:
@@ -137,12 +141,14 @@ class MainHandler:
                 is_valid_credits = mgr.check_credits(user)
                 if not is_valid_credits:
                     return forbidden
+                date_of_creating = '\n' + self.get_record_by_id(q['record']['id'])['record'].description.rsplit('\n', maxsplit=3)[-2]
+                date_of_updating = f'\nДата обновления: {datetime.now().strftime("%d.%m.%Y, %H:%M:%S")}'
                 record = DecryptedRecord(
                     uid=mgr.get_user_by_username(user.username).id,
                     service=q['record']['service'],
                     username=q['record']['username'],
                     password=q['record']['password'],
-                    description=q['record']['description'],
+                    description=q['record']['description'] + date_of_creating + date_of_updating,
                     id=q['record']['id']
                 ).encrypt(user.password)
                 mgr.update_record(record)

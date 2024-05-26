@@ -44,7 +44,11 @@
                                 <input id="password{{ record.id }}" type="password" value="{{ record.password }}" disabled>
                                 <button type="checkbox" onclick="togglePasswordVisibility('{{ record.id }}');"></button>
                             </td>
-                            <td>{{ record.description }}</td>
+                            <td>
+                                {% for line in record.description.split('\n') %}
+                                    {{ line }}<br>
+                                {% endfor %}
+                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>

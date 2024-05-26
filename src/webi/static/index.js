@@ -1,4 +1,4 @@
-var selectedRecordId = 1;
+var selectedRecordId = document.getElementsByClassName('record')[0].id.replace('record', '');
 
 function togglePasswordVisibility(id) {
     let passwordInput = document.getElementById("password" + id);

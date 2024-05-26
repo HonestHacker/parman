@@ -15,7 +15,11 @@
                 <input #username name="username" placeholder="Имя пользователя..." value="{{ record.username }}">
                 <input id="password" name="password" type="password" placeholder="Пароль..." value="{{ record.password }}"><input #show_password type="checkbox" onclick="togglePasswordVisibility()">
                 <input type="button" value="Сгенерировать надежный пароль..." onclick="document.getElementById('password').value = generatePassword();">
-                <textarea name="description" placeholder="Описание...">{{ record.description }}</textarea>
+                <textarea name="description" placeholder="Описание...">
+                    {% if record %}
+                        {{ "\n".join(record.description.split('\n')[0:-2]) }}
+                    {% endif %}
+                </textarea>
                 <input type="submit" value="Изменить.">
             </form>
             <span style="color: red;">{{ error_msg }}</span>
