@@ -123,7 +123,7 @@ class MainHandler:
                     return forbidden
                 records = mgr.get_records(mgr.get_user_by_username(user.username).id)
                 record = list(filter(lambda r: r.id == q['id'], map(lambda x: x.decrypt(user.password), records)))[0]
-                print(record, file=sys.stderr)
+                #print(record, file=sys.stderr)
         except (TypeError, KeyError) as e:
             return bad_request
         except Exception as e:
