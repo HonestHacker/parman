@@ -27,14 +27,13 @@ class Record:
     id: int = -1
     def decrypt(self, key: str):
         decrypted_password = self.password.get_decrypted_value(key)
-        print(decrypted_password)
         return DecryptedRecord(
-            id=self.id,
             uid=self.uid,
             service=self.service,
             username=self.username,
             password=decrypted_password,
-            description=self.description
+            description=self.description,
+            id=self.id
         )
 
 @dataclass
@@ -46,7 +45,7 @@ class DecryptedRecord:
     description: str
     id: int = -1
     def encrypt(self, key: str):
-        return DecryptedRecord(
+        return Record(
             id=self.id,
             uid=self.uid,
             service=self.service,

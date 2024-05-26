@@ -17,6 +17,10 @@ body {
     width: 70%;
 }
 
+.record:hover {
+    background-color: #325032 !important;
+}
+
 input {
     margin-bottom: 10px;
     font-size: 16px;

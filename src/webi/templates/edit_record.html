@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+        <title>PARMAN | Добавление записи.</title>
+        <link rel="stylesheet" href="./../static/form.css">
+    </head>
+    <body>
+        <div class="form-container">
+            <img src="./../static/logo.svg">
+            <h1>Изменение записи.</h1>
+            <form method="POST">
+                <input #record_id name="record_id" type="hidden" value="{{ record.id }}">
+                <input #username name="service" placeholder="Сервис..." value="{{ record.service }}">
+                <input #username name="username" placeholder="Имя пользователя..." value="{{ record.username }}">
+                <input #password name="password" type="password" placeholder="Пароль..." value="{{ record.password }}">
+                <textarea name="description" placeholder="Описание...">{{ record.description }}</textarea>
+                <input type="submit" value="Изменить.">
+            </form>
+            <span style="color: red;">{{ error_msg }}</span>
+        </div>
+    </body>
+</html>

@@ -27,6 +27,8 @@ class DBManager:
         raise NotImplemented
     def get_records(self, username: str) -> list[Record]:
         raise NotImplemented
+    def get_record_by_id(self, id: int) -> Record:
+        raise NotImplemented
     def update_record(self, uid: int, new_record: Record) -> None:
         raise NotImplemented
     def delete_record(self, uid: int) -> None:

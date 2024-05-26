@@ -10,8 +10,8 @@
         <div class="sidenav">
             <img src="./../static/logo.svg">
             <a href="#" onclick="openAddRecordWindow()">Добавить поле.</a>
-            <a href="#">Изменить поле.</a>
-            <a href="#">Удалить поле.</a>
+            <a href="#" onclick="openEditRecordWindow()">Изменить поле.</a>
+            <a href="#" onclick="deleteRecord()">Удалить поле.</a>
             <a href="/logout">Выйти.</a>
             <hr>
             <a href="#">О Parman.</a>
@@ -36,13 +36,13 @@
                 </thead>
                 <tbody>
                     {% for record in records %}
-                        <tr>
-                            <td>{{ record.id }}</td>
+                        <tr class="record" id="record{{ record.id }}" ondblclick="selectRecord('{{ record.id }}')">
+                            <td class="id">{{ loop.index }}</td>
                             <td>{{ record.service }}</td>
                             <td>{{ record.username }}</td>
                             <td>
                                 <input id="password{{ record.id }}" type="password" value="{{ record.password }}" disabled>
-                                <button onclick="togglePasswordVisibility('{{ record.id }}');">Show</button>
+                                <button type="checkbox" onclick="togglePasswordVisibility('{{ record.id }}');"></button>
                             </td>
                             <td>{{ record.description }}</td>
                         </tr>

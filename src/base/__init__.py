@@ -106,3 +106,64 @@ class MainHandler:
         response = ok.copy()
         response['records'] = records
         return response
+    def get_record_by_id(self, q: dict) -> dict:
+        try:
+            user = LoginCredits(
+                username=q['username'],
+                password=q['password']
+            )
+            records = []
+            with db.connect(self.db_uri) as mgr:
+                is_vaild_credits = mgr.check_credits(user)
+                if not is_vaild_credits:
+                    return forbidden
+                records = mgr.get_records(mgr.get_user_by_username(user.username).id)
+                record = list(filter(lambda r: r.id == q['id'], map(lambda x: x.decrypt(user.password), records)))[0]
+                print(record, file=sys.stderr)
+        except (TypeError, KeyError) as e:
+            return bad_request
+        except Exception as e:
+            return internal_server_error(traceback.format_exc())
+        response = ok.copy()
+        response['record'] = record
+        return response
+    def edit_record(self, q: dict):
+        try:
+            user = LoginCredits(
+                username=q['credits']['username'],
+                password=q['credits']['password']
+            )
+            with db.connect(self.db_uri) as mgr:
+                is_valid_credits = mgr.check_credits(user)
+                if not is_valid_credits:
+                    return forbidden
+                record = DecryptedRecord(
+                    uid=mgr.get_user_by_username(user.username).id,
+                    service=q['record']['service'],
+                    username=q['record']['username'],
+                    password=q['record']['password'],
+                    description=q['record']['description'],
+                    id=q['record']['id']
+                ).encrypt(user.password)
+                mgr.update_record(record)
+        except (TypeError, KeyError) as e:
+            return bad_request
+        except Exception as e:
+            return internal_server_error(traceback.format_exc())
+        return ok
+    def delete_record(self, q):
+        try:
+            user = LoginCredits(
+                username=q['credits']['username'],
+                password=q['credits']['password']
+            )
+            with db.connect(self.db_uri) as mgr:
+                is_valid_credits = mgr.check_credits(user)
+                if not is_valid_credits:
+                    return forbidden
+                mgr.delete_record(q['record']['id'])
+        except (TypeError, KeyError) as e:
+            return bad_request
+        except Exception as e:
+            return internal_server_error(traceback.format_exc())
+        return ok

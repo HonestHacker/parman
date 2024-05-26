@@ -68,7 +68,7 @@ class SQLDBManager(DBManager):
                 record.service,
                 record.username,
                 str(record.password),
-                record.description
+                record.description,
             )
         )
     def get_records(self, uid: int) -> list[Record]:
@@ -89,19 +89,19 @@ class SQLDBManager(DBManager):
             )
         )
         return records
-    def update_record(self, id: int, record: Record) -> None:
+    def update_record(self, record: Record) -> None:
         self.cursor.execute(
-            self.get_query('get_records'),
+            self.get_query('update_record'),
             (
-                id,
                 record.service,
                 record.username,
-                record.password,
-                record.description
+                str(record.password),
+                record.description,
+                record.id
             )
         )
     def delete_record(self, id: int) -> None:
-        self.cursor.execute(self.get_query('delete_record'), id)
+        self.cursor.execute(self.get_query('delete_record'), (id,))
     def close(self) -> None:
         self.connection.commit()
         self.cursor.close()
@@ -110,7 +110,6 @@ class SQLDBManager(DBManager):
 class SQLiteDBManager(SQLDBManager):
     def connect(self, uri: str) -> None:
         path = urlparse(uri).path[1:]
-        print(repr('parman.db'))
         self.connection = sqlite3.connect(path)
         self.cursor = self.connection.cursor()
 
