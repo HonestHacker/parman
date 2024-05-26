@@ -3,6 +3,7 @@
     <head> 
         <title>PARMAN | Добавление записи.</title>
         <link rel="stylesheet" href="./../static/form.css">
+        <script type="text/javascript" src="./../static/form.js"></script>
     </head>
     <body>
         <div class="form-container">
@@ -12,7 +13,8 @@
                 <input #record_id name="record_id" type="hidden" value="{{ record.id }}">
                 <input #username name="service" placeholder="Сервис..." value="{{ record.service }}">
                 <input #username name="username" placeholder="Имя пользователя..." value="{{ record.username }}">
-                <input #password name="password" type="password" placeholder="Пароль..." value="{{ record.password }}">
+                <input id="password" name="password" type="password" placeholder="Пароль..." value="{{ record.password }}"><input #show_password type="checkbox" onclick="togglePasswordVisibility()">
+                <input type="button" value="Сгенерировать надежный пароль..." onclick="document.getElementById('password').value = generatePassword();">
                 <textarea name="description" placeholder="Описание...">{{ record.description }}</textarea>
                 <input type="submit" value="Изменить.">
             </form>

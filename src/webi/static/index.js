@@ -1,16 +1,5 @@
 var selectedRecordId = 1;
 
-function generatePassword() {
-    let chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-    let stringLength = 12;
-    let randomString = '';
-    for (let i = 0; i < stringLength; i++) {
-        var rnum = Math.floor(Math.random() * chars.length);
-        randomString += chars.substring(rnum,rnum+1);
-    }
-    return randomString;
-}
-
 function togglePasswordVisibility(id) {
     let passwordInput = document.getElementById("password" + id);
     if (passwordInput.type === "password") {

@@ -3,6 +3,7 @@
     <head> 
         <title>PARMAN | Добавление записи.</title>
         <link rel="stylesheet" href="./../static/form.css">
+        <script type="text/javascript" src="./../static/form.js"></script>
     </head>
     <body>
         <div class="form-container">
@@ -11,7 +12,8 @@
             <form method="POST">
                 <input #username name="service" placeholder="Сервис...">
                 <input #username name="username" placeholder="Имя пользователя...">
-                <input #password name="password" type="password" placeholder="Пароль...">
+                <input id="password" name="password" type="password" placeholder="Пароль..."><input #show_password type="checkbox" onclick="togglePasswordVisibility()">
+                <input type="button" value="Сгенерировать надежный пароль..." onclick="document.getElementById('password').value = generatePassword();">
                 <textarea name="description" placeholder="Описание..."></textarea>
                 <input type="submit" value="Добавить.">
             </form>

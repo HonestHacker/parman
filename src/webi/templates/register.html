@@ -3,6 +3,7 @@
     <head> 
         <title>PARMAN | Регистрация.</title>
         <link rel="stylesheet" href="./../static/form.css">
+        <script type="text/javascript" src="./../static/form.js"></script>
     </head>
     <body>
         <div class="form-container">
@@ -10,7 +11,8 @@
             <h1>Регистрация.</h1>
             <form method="POST">
                 <input #username name="username" placeholder="Имя пользователя...">
-                <input #password name="password" type="password" placeholder="Мастер-пароль...">
+                <input id="password" name="password" type="password" placeholder="Мастер-пароль..."><input id="show_password" type="checkbox" onclick="togglePasswordVisibility()">
+                <input type="button" value="Сгенерировать надежный пароль..." onclick="document.getElementById('password').value = generatePassword();">
                 <input type="submit" value="Войти.">
             </form>
             <span style="color: red;">{{ error_msg }}</span>
